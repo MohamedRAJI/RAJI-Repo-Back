@@ -8,6 +8,7 @@ import org.sid.entities.Product;
 import org.sid.metier.IProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,21 +25,25 @@ public class ProductRestService {
 	private IProduct productMetier;
 
 	@GetMapping("/products")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Product> getAllProducts() {
 		return productMetier.getProducts();
 	}
 	
 	@PostMapping("/products")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Product createProduct(@RequestBody Product p) {
 		return productMetier.addProduct(p);
 	}
 	
 	@GetMapping("/products/{id}")
+	//@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Product>getProductById(@PathVariable Long id) {
 		return ResponseEntity.ok(productMetier.getProductById(id));
 	}
 	
 	@PutMapping("/products/{id}")
+	//@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Product> updateProduct(@PathVariable Long id,@RequestBody Product p){
 		Product prd=productMetier.getProductById(id);
 		p.setId(prd.getId());
@@ -46,6 +51,7 @@ public class ProductRestService {
 	}
 	
 	@DeleteMapping("/products/{id}")
+	//@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Map<String,Boolean>> deleteProduct(@PathVariable Long id){
 		Product prd=productMetier.getProductById(id);
 		productMetier.deleteProduct(prd);

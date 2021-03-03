@@ -13,10 +13,17 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Product {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String designation;
 	private int quantite;
 	private double prix;
+	
+	public Product(String designation, int qte, double prix) {
+		this.designation=designation;
+		this.quantite=qte;
+		this.prix=prix;
+	}
 }
