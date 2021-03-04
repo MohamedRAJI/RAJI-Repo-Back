@@ -8,7 +8,6 @@ import org.sid.entities.Product;
 import org.sid.metier.IProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +23,9 @@ public class ProductRestService {
 	@Autowired
 	private IProduct productMetier;
 
-	@GetMapping("/products")
+	@GetMapping("/{bank}/products")
 	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public List<Product> getAllProducts() {
+	public List<Product> getAllProducts(@PathVariable String bank) {
 		return productMetier.getProducts();
 	}
 	
@@ -36,7 +35,7 @@ public class ProductRestService {
 		return productMetier.addProduct(p);
 	}
 	
-	@GetMapping("/products/{id}")
+	/*@GetMapping("/products/{id}")
 	//@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Product>getProductById(@PathVariable Long id) {
 		return ResponseEntity.ok(productMetier.getProductById(id));
@@ -58,6 +57,6 @@ public class ProductRestService {
 		Map<String,Boolean> response=new HashMap<String, Boolean>();
 		response.put("Product deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);
-	}
+	}*/
 
 }

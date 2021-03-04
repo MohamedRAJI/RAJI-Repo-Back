@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface ParametersRepository extends JpaRepository<Parameters,Long>{
-@Query("select p from Parameters p where p.codeBank=:x")
-public List<Parameters>getParams(@Param("x") int codeBank);
+@Query("select p from Parameters p where p.bank=:x")
+public List<Parameters>getParams(@Param("x") String bank);
 }

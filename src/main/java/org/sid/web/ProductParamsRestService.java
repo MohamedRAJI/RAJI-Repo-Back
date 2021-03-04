@@ -2,8 +2,8 @@ package org.sid.web;
 
 import java.util.List;
 
-import org.sid.dao.ParametersRepository;
-import org.sid.entities.Parameters;
+import org.sid.dao.ProductParamsRepository;
+import org.sid.entities.ProductParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 @RestController
-public class ParametersRestService {
+public class ProductParamsRestService {
 	@Autowired
-	ParametersRepository paramRepo;
+	ProductParamsRepository ProductParamsRepo;
 	
-	@GetMapping("/{bank}")
-	List<Parameters>getParams(@PathVariable String bank){
-		return paramRepo.getParams(bank);
+	@GetMapping("/{bank}/Add-product")
+	List<ProductParams>getParams(@PathVariable String bank){
+		return ProductParamsRepo.getParams(bank);
 		
 	}
 

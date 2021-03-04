@@ -1,8 +1,10 @@
 package org.sid;
 
 import org.sid.dao.ParametersRepository;
+import org.sid.dao.ProductParamsRepository;
 import org.sid.entities.Parameters;
 import org.sid.entities.Product;
+import org.sid.entities.ProductParams;
 import org.sid.metier.IProduct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +16,7 @@ public class ProductsMngtBackEndApplication {
 	public static void main(String[] args) {
 		ApplicationContext ctx=SpringApplication.run(ProductsMngtBackEndApplication.class, args);
 		ParametersRepository paramRepo=ctx.getBean(ParametersRepository.class);
+		ProductParamsRepository ProductParamsRepo=ctx.getBean(ProductParamsRepository.class);
 		IProduct productMetier=ctx.getBean(IProduct.class);
 		
 		// PRODUCTS
@@ -49,10 +52,25 @@ public class ProductsMngtBackEndApplication {
 		paramRepo.save(p12);paramRepo.save(p13);paramRepo.save(p14);
 		
 		//show params
-		for(Parameters p:paramRepo.getParams(000025)) {
+		for(Parameters p:paramRepo.getParams("cih")) {
 		  System.out.println(p.getLibelle());
 		}
 		
+		//Add Product Params
+		// CIH BANK
+		ProductParams pp1=new ProductParams("cih","Designation","afficher_designation",'y');
+		ProductParams pp2=new ProductParams("cih","Prix","afficher_prix",'n');
+		ProductParams pp3=new ProductParams("cih","Quantité","afficher_quantite",'y');
+		ProductParamsRepo.save(pp1);ProductParamsRepo.save(pp2);ProductParamsRepo.save(pp3);
+		//BMCE BANK
+		ProductParams pp4=new ProductParams("bmce","Designation","afficher_designation",'y');
+		ProductParams pp5=new ProductParams("bmce","Prix","afficher_prix",'y');
+		ProductParams pp6=new ProductParams("bmce","Quantité","afficher_quantite",'n');
+		ProductParamsRepo.save(pp4);ProductParamsRepo.save(pp5);ProductParamsRepo.save(pp6);
+		//show products params
+		for(ProductParams p:ProductParamsRepo.getParams("cih")) {
+		  System.out.println(p.getLibelle());
+		}
 	}
 
 }

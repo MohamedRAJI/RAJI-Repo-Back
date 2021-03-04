@@ -2,6 +2,8 @@ package org.sid.entities;
 
 import javax.persistence.*;
 
+import org.sid.annotations.Input;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
